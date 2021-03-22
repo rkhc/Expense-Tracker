@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_selected"
+    tools:context=".fragments.SelectedExpenseFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/selected_expense_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:id="@+id/selected_expense_toolbar_text"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=""/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- type field -->
+    <TextView
+        android:id="@+id/selected_text_type_name"
+        style="@style/text_display"
+        android:text="@string/type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selected_expense_toolbar" />
+
+    <TextView
+        android:id="@+id/selected_text_type_value"
+        android:layout_width="126dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:textSize="18sp"
+        android:gravity="center|start"
+        android:ems="10"
+        app:layout_constraintBottom_toBottomOf="@id/selected_text_type_name"
+        app:layout_constraintStart_toEndOf="@id/selected_text_type_name"/>
+
+    <!-- price field -->
+    <TextView
+        android:id="@+id/selected_text_price_name"
+        style="@style/text_display"
+        android:text="@string/price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selected_text_type_name" />
+
+    <TextView
+        android:id="@+id/selected_text_price_value"
+        android:layout_width="126dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:textSize="18sp"
+        android:gravity="center|start"
+        android:ems="10"
+        app:layout_constraintBottom_toBottomOf="@id/selected_text_price_name"
+        app:layout_constraintStart_toEndOf="@id/selected_text_price_name"/>
+
+    <!-- date field -->
+    <TextView
+        android:id="@+id/selected_text_date_name"
+        style="@style/text_display"
+        android:text="@string/date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selected_text_price_name" />
+
+    <TextView
+        android:id="@+id/selected_text_date_value"
+        android:layout_width="126dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:textSize="18sp"
+        android:gravity="center|start"
+        android:ems="10"
+        app:layout_constraintBottom_toBottomOf="@id/selected_text_date_name"
+        app:layout_constraintStart_toEndOf="@id/selected_text_date_name"/>
+
+    <Button
+        android:id="@+id/selected_back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selected_text_date_name" />
+
+    <Button
+        android:id="@+id/selected_edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/edit"
+        app:layout_constraintEnd_toEndOf="@id/selected_text_date_value"
+        app:layout_constraintStart_toEndOf="@id/selected_back_button"
+        app:layout_constraintTop_toTopOf="@id/selected_back_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
