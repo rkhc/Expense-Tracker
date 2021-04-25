@@ -106,11 +106,6 @@ class CreateNewExpenseFragment : BaseFragment() {
 
             if(created_expense.type != "")
             {
-//                Log.e("roger", created_expense.type)
-//                Log.e("roger",  created_expense.name)
-//                Log.e("roger", DbQueryHelper.formatNumberCurrency(created_expense.price.toString()))
-//                Log.e("roger", created_expense.date)
-
                 //insertEntryToDB(created_expense.type, created_expense.name, created_expense.price, created_expense.date)
                 DbQueryHelper.insertExpenseObject(created_expense)
 
@@ -144,12 +139,12 @@ class CreateNewExpenseFragment : BaseFragment() {
     }
 
     private fun initializeDropdown(view : View) {
-        var dropdown = view.findViewById(R.id.create_text_type_value) as Spinner
-        dropdown.adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, expenseTypes)
+        val dropdown = view.findViewById(R.id.create_text_type_value) as Spinner
+        dropdown.adapter = ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1, expenseTypes)
 
-        dropdown?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        dropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                Log.e("roger", "Nothing selected")
+                Log.e("CreateNewExpenseFragment::initializeDropdown", "Nothing selected")
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

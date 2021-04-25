@@ -64,7 +64,7 @@ class FeedReaderDbHelper(context: Context) : SQLiteOpenHelper(context,
 
         // Filter results WHERE "title" = 'My Title'
         val selection = "${FeedReaderContract.FeedEntry.COLUMN_TYPE} = ?"
-        //val selectionArgs = arrayOf("Roger")
+
         val selectionArgs = arrayOf("BILLS")
 
         // How you want the results sorted in the resulting Cursor
@@ -80,7 +80,7 @@ class FeedReaderDbHelper(context: Context) : SQLiteOpenHelper(context,
             sortOrder               // The sort order
         )
 
-        var counter = 1;
+        var counter = 1
         val itemIds = mutableListOf<String>()
         with(cursor) {
             while (moveToNext()) {
@@ -95,7 +95,7 @@ class FeedReaderDbHelper(context: Context) : SQLiteOpenHelper(context,
         }
 
         for(elem in itemIds) {
-            Log.e("roger", elem)
+            Log.e("Logger", elem)
         }
 
         cursor.close()

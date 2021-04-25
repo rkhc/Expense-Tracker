@@ -64,34 +64,32 @@ open class BaseFragment : Fragment() {
     protected fun openFragment(fragment: Fragment)
     {
         val transaction = getActivity()?.supportFragmentManager?.beginTransaction() as FragmentTransaction
-        if(transaction != null) {
-            transaction.replace(R.id.fragment_container, fragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
+
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     protected fun openFragmentNoBackStack(fragment: Fragment)
     {
         val transaction = getActivity()?.supportFragmentManager?.beginTransaction() as FragmentTransaction
-        if(transaction != null) {
-            transaction.replace(R.id.fragment_container, fragment)
-            getActivity()?.supportFragmentManager?.popBackStack()
-            transaction.commit()
-        }
+
+        transaction.replace(R.id.fragment_container, fragment)
+        getActivity()?.supportFragmentManager?.popBackStack()
+        transaction.commit()
     }
 
     protected fun removeBackStack() {
         val fm =  getActivity()?.supportFragmentManager as FragmentManager
         for(i in 0 until fm.backStackEntryCount) {
-            fm.popBackStack();
+            fm.popBackStack()
         }
     }
 
     protected fun addBackButtonForToolbar(toolbarID : Int, view : View?) {
         val toolbar = view?.findViewById(toolbarID) as Toolbar
-        toolbar?.setNavigationIcon(R.drawable.ic_arrow_back)
-        toolbar?.setNavigationOnClickListener { activity!!.onBackPressed() }
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        toolbar.setNavigationOnClickListener { activity!!.onBackPressed() }
     }
 
     protected fun refreshFragment () {
@@ -102,7 +100,7 @@ open class BaseFragment : Fragment() {
         val fragment = this
         val transaction : FragmentTransaction? = getActivity()?.supportFragmentManager?.beginTransaction() as FragmentTransaction
 
-        if(transaction != null && fragment != null) {
+        if(transaction != null) {
             //transaction.detach(fragment)
             //transaction.attach(fragment)
             //transaction.commit()
@@ -120,6 +118,6 @@ open class BaseFragment : Fragment() {
     }
 
     protected fun Logger(text : String) {
-        Log.e("roger", text)
+        Log.e("Logger", text)
     }
 }

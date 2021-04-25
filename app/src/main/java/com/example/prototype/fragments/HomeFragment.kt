@@ -19,10 +19,9 @@ import com.example.prototype.R
 import com.example.prototype.database.DbQueryHelper
 import java.text.DecimalFormat
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "rogerparam1"
-private const val ARG_PARAM2 = "rogerparam2"
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -60,7 +59,7 @@ class HomeFragment : BaseFragment() {
         val image = view.findViewById(R.id.home_toolbar_add_sign) as ImageView
         image.setOnClickListener {
             // your code to perform when the user clicks on the ImageView
-            openFragment(CreateNewExpenseFragment.newInstance("", ""));
+            openFragment(CreateNewExpenseFragment.newInstance("", ""))
         }
     }
 
@@ -87,7 +86,7 @@ class HomeFragment : BaseFragment() {
     private fun populateArray(context : Context?, listView : ListView) {
 
         //var expenses = DbQueryHelper.extractAllExpenseObjects()
-        var expenses = DbQueryHelper.filterDB("Month",DbQueryHelper.currentMonth,null)
+        val expenses = DbQueryHelper.filterDB("Month",DbQueryHelper.currentMonth,null)
 
         if(expenses != null) {
             //expense name the user will see
@@ -101,7 +100,7 @@ class HomeFragment : BaseFragment() {
             //param2, the template layout of the list, there are preset templates to choose from
             //param3, the textview arguments
             val adapter =
-                ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, expense_names)
+                ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1, expense_names)
             listView.adapter = adapter
 
             //change fragments when team name is selected

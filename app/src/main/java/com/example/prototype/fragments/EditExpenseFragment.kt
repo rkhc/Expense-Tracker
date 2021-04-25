@@ -36,7 +36,7 @@ class EditExpenseFragment : BaseFragment() {
     private var editExpenseID = -1
     private var edit_expense: ExpenseDB = ExpenseDB(-1, "", "", 0.0, "")
 
-    private var mDateSetListener : DatePickerDialog.OnDateSetListener? = null;
+    private var mDateSetListener : DatePickerDialog.OnDateSetListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,15 +77,15 @@ class EditExpenseFragment : BaseFragment() {
             dateText = edit_expense.date
         }
 
-        var toolbarView = view.findViewById(R.id.edit_expense_toolbar_text) as TextView
-        var typeSpinner = view.findViewById(R.id.edit_text_type_value) as Spinner
-        var nameView = view.findViewById(R.id.edit_text_name_value) as TextView
-        var priceView = view.findViewById(R.id.edit_text_price_value) as TextView
-        var dateView = view.findViewById(R.id.edit_text_date_value) as TextView
+        val toolbarView = view.findViewById(R.id.edit_expense_toolbar_text) as TextView
+        val typeSpinner = view.findViewById(R.id.edit_text_type_value) as Spinner
+        val nameView = view.findViewById(R.id.edit_text_name_value) as TextView
+        val priceView = view.findViewById(R.id.edit_text_price_value) as TextView
+        val dateView = view.findViewById(R.id.edit_text_date_value) as TextView
 
         toolbarView.text = toolbarText
         val spinnerStrings = typeSpinner.adapter as ArrayAdapter<String>
-        typeSpinner.setSelection(spinnerStrings.getPosition(typeText));
+        typeSpinner.setSelection(spinnerStrings.getPosition(typeText))
         nameView.text = nameText
         priceView.text = priceText
         dateView.text = DbQueryHelper.formatDate(dateText)
@@ -114,12 +114,12 @@ class EditExpenseFragment : BaseFragment() {
     }
 
     private fun initializeDropdown(view : View) {
-        var dropdown = view?.findViewById(R.id.edit_text_type_value) as Spinner
-        dropdown.adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, expenseTypes)
+        val dropdown = view.findViewById(R.id.edit_text_type_value) as Spinner
+        dropdown.adapter = ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1, expenseTypes)
 
-        dropdown?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        dropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                Log.e("roger", "Nothing selected")
+                Log.e("EditExpenseFragment::initializeDropdown", "Nothing selected")
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -147,9 +147,9 @@ class EditExpenseFragment : BaseFragment() {
 
         mDateSetListener =
             DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
-                var month = month
-                month = month + 1
-                val date = "$day/$month/$year"
+                var monthdate = month
+                monthdate = monthdate + 1
+                val date = "$day/$monthdate/$year"
                 dateView.text = date
             }
     }

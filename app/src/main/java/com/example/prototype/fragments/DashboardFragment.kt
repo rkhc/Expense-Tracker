@@ -119,14 +119,14 @@ class DashboardFragment : BaseFragment() {
         var entries = ArrayList<PieEntry>()
 
         //for each section of the pie chart
-        var hashMap = HashMap<String, Double>()
+        val hashMap = HashMap<String, Double>()
 
         //split by type
         if(dashboardTypeSelected == DashboardExpenseType.All.expenseValue) {
             for (elem in dashboardExpenseObjects!!) {
                 if (hashMap.containsKey(elem.type)) {
-                    var currentPrice =
-                        hashMap.get(elem.type)?.toDouble()?.plus(elem.price) as Double
+                    val currentPrice =
+                        hashMap.get(elem.type)?.plus(elem.price) as Double
                     hashMap[elem.type] = currentPrice
                 }
                 //add the item in the hashmap
@@ -139,8 +139,8 @@ class DashboardFragment : BaseFragment() {
         else {
             for (elem in dashboardExpenseObjects!!) {
                 if (hashMap.containsKey(elem.name)) {
-                    var currentPrice =
-                        hashMap.get(elem.name)?.toDouble()?.plus(elem.price) as Double
+                    val currentPrice =
+                        hashMap.get(elem.name)?.plus(elem.price) as Double
                     hashMap[elem.name] = currentPrice
                 }
                 //add the item in the hashmap
@@ -183,26 +183,26 @@ class DashboardFragment : BaseFragment() {
     private fun initializeDropdown(view : View) {
         //initialize unit array
         //never changes dropdown list
-        var dropdownUnit = view.findViewById(R.id.dashboard_time_unit_dropdown) as Spinner
-        dropdownUnit.adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, timeUnitTypes)
+        val dropdownUnit = view.findViewById(R.id.dashboard_time_unit_dropdown) as Spinner
+        dropdownUnit.adapter = ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1, timeUnitTypes)
         dropdownUnit.setSelection(dashboardUnitSelected)
 
         //initialize value array
         val valueArray = extractTimeValuesFromUnit(dashboardUnitSelected)
-        var dropdownValue = view.findViewById(R.id.dashboard_time_value_dropdown) as Spinner
-        dropdownValue?.adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, valueArray)
+        val dropdownValue = view.findViewById(R.id.dashboard_time_value_dropdown) as Spinner
+        dropdownValue.adapter = ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1, valueArray)
         dropdownValue.setSelection(dashboardValueSelected)
 
         //initialize category array
         //never changes dropdown list
-        var dropdownCategory = view.findViewById(R.id.dashboard_category_dropdown) as Spinner
-        dropdownCategory.adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, dashboardExpenseTypes)
+        val dropdownCategory = view.findViewById(R.id.dashboard_category_dropdown) as Spinner
+        dropdownCategory.adapter = ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1, dashboardExpenseTypes)
 
         Logger("unit selected is: " + timeUnitTypes[dashboardUnitSelected])
         Logger("value selected is: " + dashboardValueSelected.toString())
 
         //item listener
-        dropdownUnit?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        dropdownUnit.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             //var dropdownValue = view.findViewById(R.id.dashboard_time_value_dropdown) as Spinner
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -228,7 +228,7 @@ class DashboardFragment : BaseFragment() {
 
                     //create new dropdown list for values as unit changed
                     val valueArray = extractTimeValuesFromUnit(dashboardUnitSelected)
-                    dropdownValue?.adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, valueArray)
+                    dropdownValue.adapter = ArrayAdapter<String>(context!!, android.R.layout.simple_list_item_1, valueArray)
                     dropdownValue.setSelection(dashboardValueSelected)
                     //refresh the layout if any changes to update dropdown unit adapter
                     refreshFragment()
@@ -236,7 +236,7 @@ class DashboardFragment : BaseFragment() {
             }
         }
 
-        dropdownValue?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        dropdownValue.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             var dropdownUnit = view.findViewById(R.id.dashboard_time_unit_dropdown) as Spinner
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -256,7 +256,7 @@ class DashboardFragment : BaseFragment() {
             }
         }
 
-        dropdownCategory?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        dropdownCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             var dropdownUnit = view.findViewById(R.id.dashboard_time_unit_dropdown) as Spinner
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -291,16 +291,13 @@ class DashboardFragment : BaseFragment() {
     }
 
     private fun filterDBQuery(unit : String, value : Int, type : String) {
-        var changed : Boolean = false
+        var changed = false
 
-        val  s = "new unit: " + unit + " value: " + value.toString() + " type: " + type
-        val  s1 = "old unit: " + stringTimeUnit + " value: " + stringTimeValue.toString() + " type: " + stringCategory
-
-        Log.e("roger", s1)
-        Log.e("roger", s)
+        //val  s = "new unit: " + unit + " value: " + value.toString() + " type: " + type
+        //val  s1 = "old unit: " + stringTimeUnit + " value: " + stringTimeValue.toString() + " type: " + stringCategory
 
         if(stringTimeUnit != unit || stringTimeValue != value || stringCategory != type)
-            changed = true;
+            changed = true
 
         //any type set to null to not search for anything specific type
         if(unit != null) {
@@ -337,7 +334,7 @@ class DashboardFragment : BaseFragment() {
     private fun createPieChart(view : View, entries :  ArrayList<PieEntry>?) {
 
 
-        var pieEntries = ArrayList<PieEntry>(); //multiple entries
+        var pieEntries = ArrayList<PieEntry>() //multiple entries
         var title = "Total Spent: " //total price
 
         if(entries == null) {
@@ -351,23 +348,23 @@ class DashboardFragment : BaseFragment() {
         }
 
         //dataset
-        var pieDataSet = PieDataSet(pieEntries, "")
-        pieDataSet?.colors = ColorTemplate.PASTEL_COLORS.toMutableList()
-        pieDataSet?.valueTextColor = Color.WHITE;
-        pieDataSet?.valueTextSize = 20f;
-        //pieDataSet?.sliceSpace = 5f;
+        val pieDataSet = PieDataSet(pieEntries, "")
+        pieDataSet.colors = ColorTemplate.PASTEL_COLORS.toMutableList()
+        pieDataSet.valueTextColor = Color.WHITE
+        pieDataSet.valueTextSize = 20f
+        //pieDataSet?.sliceSpace = 5f
 
         //data
-        var pieData = PieData(pieDataSet)
+        val pieData = PieData(pieDataSet)
 
         //pie chart
-        var pieChart = view.findViewById(R.id.dashboard_pieChart) as PieChart
+        val pieChart = view.findViewById(R.id.dashboard_pieChart) as PieChart
 
         val desc = Description()
         desc.text = if(entries == null) "NIL" else title
         desc.textSize = 20f
 
-        pieChart?.description = desc
-        pieChart?.data = pieData
+        pieChart.description = desc
+        pieChart.data = pieData
     }
 }
